@@ -1,0 +1,54 @@
+[
+  {
+    "device_ast_id": "device_ast_id-222",
+    "device_psr_id": "device_psr_id-111",
+    "device_identifier": "2222222222222222",
+    "device_city_name": "city_name",
+    "device_psr_name": "psr_nameA相",
+    "device_name": "测试2222测试",
+    "device_manufacturer": "90F9AD6F-A9B4-4764-B80E-61CB6C85CBD5-00001",
+    "device_model": "1CC/TR",
+    "device_rundate": "2026-10-10"
+
+
+  }
+//  {
+//    "device_ast_id": "device_ast_id-333",
+//    "device_psr_id": "device_psr_id-111",
+//    "device_identifier": "333333333333333333",
+//    "device_city_name": "city_name",
+//    "device_psr_name": "psr_nameBB相",
+//    "device_name": "测试3333测试"
+//  },
+//  {
+//    "device_ast_id": "device_ast_id-444",
+//    "device_psr_id": "device_psr_id-111",
+//    "device_identifier": "44444",
+//    "device_city_name": "city_name",
+//    "device_psr_name": "psr_nameBBc相",
+//    "device_name": "测试4444测试"
+//  }
+//,
+//  {
+//    "device_ast_id": null,
+//    "device_psr_id": "device_psr_id-888",
+//    "device_identifier": "8888",
+//    "device_city_name": "city_name",
+//    "device_psr_name": "psr_nameBBc8相",
+//    "device_name": "测试8888测试"
+//  }
+//  {
+//    "device_ast_id": "device_ast_id-222",
+//    "device_psr_id": "device_psr_id-222",
+//    "device_identifier": "2222222222222222",
+//    "device_city_name": "city_name",
+//    "device_psr_name": "psr_nameB相",
+//    "name": "测试2222"
+//  },
+//  {
+//    "device_ast_id": "device_ast_id-333",
+//    "device_psr_id": "device_psr_id-333",
+//    "device_identifier": "33333333333333",
+//    "name": "测试3333"
+//  }
+]

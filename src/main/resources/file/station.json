@@ -1,0 +1,26 @@
+[
+  {
+    "ast_id": "station111",
+    "psr_id": "device_psr_id-111",
+    "name": "变电站名字111",
+    "city": "1122city",
+    "voltage_level": "111"
+  },
+  {
+    "ast_id": "station222",
+    "psr_id": "device_psr_id-2222222",
+    "name": "变电站名字222",
+    "city": "112233city",
+    "voltage_level": "222"
+
+  },
+  {
+    "ast_id": "device_ast_id-333",
+    "psr_id": "device_psr_id-333",
+    "station": "station111",
+    "name": "变电站名字333",
+    "voltage_level": "333"
+
+  }
+
+]

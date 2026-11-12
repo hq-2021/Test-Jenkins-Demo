@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.CmstSolublegasinoilMapper">
+    <resultMap id="BaseResultMap" type="com.example.demo.domain.CmstSolublegasinoil">
+        <result property="objId" column="OBJ_ID" jdbcType="CHAR"/>
+        <result property="objDispidx" column="OBJ_DISPIDX" jdbcType="DECIMAL"/>
+        <result property="objCaption" column="OBJ_CAPTION" jdbcType="VARCHAR"/>
+        <result property="linkeddevice" column="LINKEDDEVICE" jdbcType="VARCHAR"/>
+        <result property="devicecode" column="DEVICECODE" jdbcType="VARCHAR"/>
+        <result property="phase" column="PHASE" jdbcType="VARCHAR"/>
+        <result property="acquisitiontime" column="ACQUISITIONTIME" jdbcType="TIMESTAMP"/>
+        <result property="h2" column="H2" jdbcType="DECIMAL"/>
+        <result property="ch4" column="CH4" jdbcType="DECIMAL"/>
+        <result property="c2h4" column="C2H4" jdbcType="DECIMAL"/>
+        <result property="c2h2" column="C2H2" jdbcType="DECIMAL"/>
+        <result property="co" column="CO" jdbcType="DECIMAL"/>
+        <result property="co2" column="CO2" jdbcType="DECIMAL"/>
+        <result property="o2" column="O2" jdbcType="DECIMAL"/>
+        <result property="n2" column="N2" jdbcType="DECIMAL"/>
+        <result property="totalhydrocarbon" column="TOTALHYDROCARBON" jdbcType="DECIMAL"/>
+        <result property="ishandled" column="ISHANDLED" jdbcType="CHAR"/>
+        <result property="c2h6" column="C2H6" jdbcType="DECIMAL"/>
+        <result property="resaveTime" column="RESAVE_TIME" jdbcType="TIMESTAMP"/>
+
+        <!-- 新增字段：增量数据 -->
+        <result property="c2h2WkAbsInc" column="C2H2_WK_ABS_INC" jdbcType="DECIMAL"/>
+        <result property="h2WkAbsInc" column="H2_WK_ABS_INC" jdbcType="DECIMAL"/>
+        <result property="totHydWkAbsInc" column="TOT_HYD_WK_ABS_INC" jdbcType="DECIMAL"/>
+        <result property="totHydWkRelRate" column="TOT_HYD_WK_REL_RATE" jdbcType="DECIMAL"/>
+        <result property="c2h2DyAbsInc" column="C2H2_DY_ABS_INC" jdbcType="DECIMAL"/>
+        <result property="c2h2FhAbsInc" column="C2H2_FH_ABS_INC" jdbcType="DECIMAL"/>
+        <result property="c2h2ThAbsInc" column="C2H2_TH_ABS_INC" jdbcType="DECIMAL"/>
+
+        <!-- 新增字段：告警信息 -->
+        <result property="c2h2Alm" column="C2H2_ALM" jdbcType="VARCHAR"/>
+        <result property="h2Alm" column="H2_ALM" jdbcType="VARCHAR"/>
+        <result property="totHydAlm" column="TOT_HYD_ALM" jdbcType="VARCHAR"/>
+        <result property="c2h2UPrush" column="C2H2_U_PRUSH" jdbcType="VARCHAR"/>
+        <result property="h2UPrush" column="H2_U_PRUSH" jdbcType="VARCHAR"/>
+        <result property="tHyUPrush" column="T_HY_U_PRUSH" jdbcType="VARCHAR"/>
+        <result property="h2InsAlm" column="H2_INS_ALM" jdbcType="VARCHAR"/>
+        <result property="c2h2InsAlm" column="C2H2_INS_ALM" jdbcType="VARCHAR"/>
+        <result property="tHyInsAlm" column="T_HY_INS_ALM" jdbcType="VARCHAR"/>
+        <result property="h2AbsInsAlm" column="H2_ABS_INS_ALM" jdbcType="VARCHAR"/>
+        <result property="thyAbsInsAlm" column="THY_ABS_INS_ALM" jdbcType="VARCHAR"/>
+        <result property="c2h2AbsInsAlm" column="C2H2_ABS_INS_ALM" jdbcType="VARCHAR"/>
+        <result property="tHyRelAlm" column="T_HY_REL_ALM" jdbcType="VARCHAR"/>
+
+        <result property="devicecode" column="DEVICECODE" jdbcType="VARCHAR"/>
+        <result property="linkedDeptName" column="LINKEDDEPTNAME" jdbcType="VARCHAR"/>
+        <result property="factory" column="factory" jdbcType="VARCHAR"/>
+        <!--        <result column="ACQUISITIONTIME1" property="acquisitiontime"/>-->
+        <result column="LINKEDSTATIONNAME" property="linkedStationName"/>
+        <result column="DEVICENAME" property="deviceName"/>
+        <result column="VOLTAGEGRADE" property="voltageGrade"/>
+        <result column="dataType" property="dataType"/>
+        <result column="param" property="param"/>
+        <result column="alarmlevel" property="alarmlevel"/>
+        <result column="ISDETECT" property="isDetect"/>
+    </resultMap>
+
+    <select id="getCmstSolublegasinoilList" resultMap="BaseResultMap">
+        SELECT ACQUISITIONTIME, ISDETECT, H2, CH4, C2H4, C2H6, C2H2, TOTALHYDROCARBON, VOLTAGEGRADE, devicecode,OBJ_ID
+        FROM (SELECT sorted_data.*,
+                     CASE WHEN @devicecode = devicecode THEN @row_number := @row_number + 1 ELSE @row_number := 1 END AS row_num,
+                     @devicecode := devicecode
+              FROM (SELECT cs.ACQUISITIONTIME, cs.ISDETECT, cs.H2, cs.CH4, cs.C2H4, cs.C2H6, cs.C2H2, cs.TOTALHYDROCARBON, cp.VOLTAGEGRADE, cp.devicecode,cs.OBJ_ID
+                  FROM cmst_solublegasinoil cs INNER JOIN cmst_transfdevice ct ON cs.DEVICECODE = ct.DEVICECODE
+                  INNER JOIN cmst_physicsdevice cp ON cp.OBJ_ID = ct.PHYSICDEVICE WHERE cs.ACQUISITIONTIME !="0000-00-00 00:00:00" and cs.ACQUISITIONTIME is not null
+                  ORDER BY cp.devicecode, cs.ACQUISITIONTIME DESC) sorted_data
+                  CROSS JOIN (SELECT @row_number := 0, @devicecode := '') vars) ranked_data
+        WHERE 150>=row_num
+    </select>
+
+
+</mapper>
