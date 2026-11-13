@@ -27,6 +27,8 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.38</version> <!-- 至少为 1.18.30 -->
+            <scope>provided</scope>
         </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
