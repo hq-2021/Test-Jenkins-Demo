@@ -156,7 +156,7 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <mainClass>com.example.demo.DemoApplication</mainClass>
-                    <skip>true</skip>
+                    <!-- ⚠️ 千万不要写 <skip>true</skip> -->
                 </configuration>
                 <executions>
                     <execution>
