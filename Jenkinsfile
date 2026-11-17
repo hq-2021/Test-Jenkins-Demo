@@ -40,9 +40,12 @@ pipeline {
 
         stage('Maven Build') {
             steps {
-                echo '🔨 Building application...'
-                // 编译并打包
-                sh 'mvn clean package -DskipTests'
+                sh '''
+                    echo "===== 检查当前 Java 版本 ====="
+                    java -version
+                    echo "=============================="
+                    mvn clean package -DskipTests
+                '''
             }
             post {
                 success {
