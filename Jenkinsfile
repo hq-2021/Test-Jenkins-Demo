@@ -4,6 +4,7 @@ pipeline {
     tools {
         // 使用你 Jenkins 全局配置的 Maven 名称
         maven 'Maven 3.9.5'
+        JDK 8
     }
 
     environment {
